@@ -11,18 +11,18 @@ import java.sql.Connection;
 public class Main {
     public static void main(String[] args) {
 
-        UserDao userDao = new UserDaoJDBCImpl();
+        UserServiceImpl userService = new UserServiceImpl();
 
-        userDao.createUsersTable();
+        userService.createUsersTable();
 
-        userDao.saveUser("Алексей", "Смирнов", (byte) 18);
-        userDao.saveUser("Дмитрий", "Зуев", (byte) 45);
-        userDao.saveUser("Иван", "Иванов", (byte) 27);
-        userDao.saveUser("Владимир", "Корнилов", (byte) 25);
+        userService.saveUser("Алексей", "Смирнов", (byte) 18);
+        userService.saveUser("Дмитрий", "Зуев", (byte) 45);
+        userService.saveUser("Иван", "Иванов", (byte) 27);
+        userService.saveUser("Владимир", "Корнилов", (byte) 25);
 
-        userDao.removeUserById(1);
-        userDao.getAllUsers();
-        userDao.cleanUsersTable();
-        userDao.dropUsersTable();
+        userService.removeUserById(1);
+        userService.getAllUsers();
+        userService.cleanUsersTable();
+        userService.dropUsersTable();
     }
 }

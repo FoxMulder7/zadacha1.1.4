@@ -11,7 +11,6 @@ import java.util.List;
 public class UserDaoJDBCImpl implements UserDao {
 
     Connection connection = Util.getConnection();
-// User user = new User();
 
     public UserDaoJDBCImpl() {
 
@@ -25,6 +24,7 @@ public class UserDaoJDBCImpl implements UserDao {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
     }
 
     @Override
@@ -66,10 +66,11 @@ public class UserDaoJDBCImpl implements UserDao {
     public List<User> getAllUsers() {
         List<User> users = new ArrayList<>();
         try {
-            connection.setTransactionIsolation(Connection.TRANSACTION_SERIALIZABLE);
-            connection.setAutoCommit(false);
-            Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("SELECT * FROM tabletwo");
+            String userId = "1";
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM tabletwo WHERE id = ?");
+            preparedStatement.setString(1, userId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
             while (resultSet.next()) {
                 long id = resultSet.getLong("id");
                 String name = resultSet.getString("firstName");
