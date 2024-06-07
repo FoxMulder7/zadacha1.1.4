@@ -1,8 +1,11 @@
 package jm.task.core.jdbc.util;
 
 import java.sql.Connection;
+import java.util.Properties;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+
+
 
 public class Util {
     private static final String HOST = "jdbc:mysql://localhost:3306/schema_name";

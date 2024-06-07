@@ -39,8 +39,11 @@ public class UserDaoJDBCImpl implements UserDao {
     }
     @Override
     public void saveUser(String name, String lastName, byte age) {
-        try (Statement statement = connection.createStatement()) {
-            statement.executeUpdate("INSERT INTO tabletwo(firstName, lastName, age) " +
+        try (PreparedStatement ps = connection.prepareStatement("INSERT INTO tabletwo(firstName, lastName, age) VALUES(?, ?, ?)")) {
+            ps.setString(1, name);
+            ps.setString(2, lastName);
+            ps.setByte(3, age);
+            ps.executeUpdate("INSERT INTO tabletwo(firstName, lastName, age) " +
                     "VALUES('" + name + "', '" + lastName + "', '" + age + "')");
             connection.commit();
             System.out.println("Пользователь: " + name + " " + lastName +  " - возраст: " + age + " " + " лет, добавлен");
